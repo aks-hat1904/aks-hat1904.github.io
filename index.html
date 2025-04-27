@@ -1,476 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Name | Personal Brand</title>
-  <style>
-    :root {
-      --primary-color: #0f172a;
-      --accent-color: #3b82f6;
-      --text-color: #1e293b;
-      --light-bg: #f8fafc;
-      --transition: all 0.3s ease;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>slॐ0i | Personal Brand</title>
+    <style>
+        :root {
+            --primary-color: #db2777;
+            --accent-color: #f9a8d4;
+            --text-color: #f9a8d4;
+            --bg-color: #0a0a5f;
+            --transition: all 0.6s ease;
+        }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
 
-    body {
-      background-color: var(--light-bg);
-      color: var(--text-color);
-      line-height: 1.6;
-    }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-    header {
-      background-color: white;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-    }
+        header {
+            background-color: var(--bg-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 20px 0;
+        }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 0;
-    }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    .logo {
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--primary-color);
-    }
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
 
-    .nav-links {
-      display: flex;
-      gap: 30px;
-    }
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
 
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text-color);
-      font-weight: 500;
-      transition: var(--transition);
-    }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+            cursor: pointer;
+        }
 
-    .nav-links a:hover {
-      color: var(--accent-color);
-    }
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
 
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      font-size: 24px;
-      cursor: pointer;
-      color: var(--primary-color);
-    }
+        main {
+            padding-top: 100px;
+            height: calc(100vh - 100px);
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+        }
 
-    .hero {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding-top: 60px;
-      text-align: center;
-      background-color: var(--light-bg);
-    }
+        .tile-section, .page-section {
+            min-height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(50px);
+        }
 
-    .hero-content {
-      max-width: 800px;
-    }
+        .tile-section {
+            background-size: cover;
+            background-position: center;
+        }
 
-    .hero h1 {
-      font-size: 3.5rem;
-      font-weight: 800;
-      color: var(--primary-color);
-      margin-bottom: 20px;
-      line-height: 1.2;
-    }
+        .tile-section::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(249, 168, 212, 0.4);
+            z-index: 1;
+        }
 
-    .hero p {
-      font-size: 1.2rem;
-      margin-bottom: 30px;
-    }
+        .tile-content {
+            position: relative;
+            z-index: 2;
+            color: var(--bg-color);
+        }
 
-    .cta-btn {
-      display: inline-block;
-      background-color: var(--accent-color);
-      color: white;
-      padding: 12px 25px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: var(--transition);
-    }
+        .tile-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
 
-    .cta-btn:hover {
-      background-color: #2563eb;
-      transform: translateY(-2px);
-    }
+        .tile-content p {
+            font-size: 1.5rem;
+        }
 
-    .sections {
-      padding: 80px 0;
-    }
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-    .section-title {
-      font-size: 2rem;
-      margin-bottom: 40px;
-      text-align: center;
-      color: var(--primary-color);
-    }
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 30px;
-    }
+        .glass {
+            width: 30px;
+            height: 50px;
+            border: 2px solid var(--accent-color);
+            margin: 10px;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .card {
-      background-color: white;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-      transition: var(--transition);
-    }
+        .water {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 50%;
+            background-color: var(--accent-color);
+            animation: pour 1s infinite alternate;
+        }
 
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    }
+        @keyframes pour {
+            from { height: 30%; }
+            to { height: 60%; }
+        }
 
-    .card-img {
-      height: 180px;
-      background-color: #e2e8f0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      color: var(--accent-color);
-    }
-
-    .card-content {
-      padding: 20px;
-    }
-
-    .card h3 {
-      margin-bottom: 10px;
-      font-size: 1.2rem;
-    }
-
-    .card p {
-      color: #64748b;
-      margin-bottom: 15px;
-    }
-
-    .card a {
-      color: var(--accent-color);
-      text-decoration: none;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-    }
-
-    .card a:hover {
-      text-decoration: underline;
-    }
-
-    footer {
-      background-color: var(--primary-color);
-      color: white;
-      padding: 40px 0;
-    }
-
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 30px;
-    }
-
-    .footer-section {
-      flex: 1;
-      min-width: 200px;
-    }
-
-    .footer-section h3 {
-      margin-bottom: 20px;
-      font-size: 1.2rem;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 15px;
-      margin-top: 15px;
-    }
-
-    .social-links a {
-      color: white;
-      font-size: 20px;
-      transition: var(--transition);
-    }
-
-    .social-links a:hover {
-      color: var(--accent-color);
-    }
-
-    .copyright {
-      text-align: center;
-      margin-top: 40px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    /* Pages and transitions */
-    .hidden {
-      display: none;
-    }
-
-    .page {
-      min-height: 100vh;
-      padding-top: 100px;
-      animation: fadeIn 0.5s ease;
-      text-align: center;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .back-btn {
-      display: inline-block;
-      margin-top: 30px;
-      color: var(--accent-color);
-      font-weight: 600;
-      text-decoration: none;
-    }
-
-    .back-btn:hover {
-      text-decoration: underline;
-    }
-
-    @media (max-width: 768px) {
-      .mobile-menu-btn {
-        display: block;
-      }
-
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        background-color: white;
-        flex-direction: column;
-        padding: 20px;
-        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-      }
-
-      .nav-links.active {
-        display: flex;
-      }
-
-      .hero h1 {
-        font-size: 2.5rem;
-      }
-
-      .footer-content {
-        flex-direction: column;
-      }
-    }
-  </style>
+    </style>
 </head>
 <body>
+<div id="loader">
+    <div class="glass"><div class="water"></div></div>
+    <div class="glass"><div class="water"></div></div>
+</div>
 
-  <header>
+<header>
     <div class="container">
-      <nav>
-        <div class="logo">Your Name</div>
-        <div class="nav-links">
-          <a href="#physics">Physics</a>
-          <a href="#philosophy">Philosophy</a>
-          <a href="#fitness">Fitness</a>
-          <a href="#fun">Fun Stuff</a>
-          <a href="#courses">Courses</a>
-          <a href="#contact">Contact</a>
-        </div>
-        <button class="mobile-menu-btn">☰</button>
-      </nav>
+        <nav>
+            <div class="logo">slॐ0i</div>
+            <div class="nav-links">
+                <a data-section="home">Home</a>
+                <a data-section="philosophy">Philosophy</a>
+                <a data-section="physics">Physics</a>
+                <a data-section="bodybuilding">Bodybuilding</a>
+                <a data-section="projects">Projects</a>
+            </div>
+        </nav>
     </div>
-  </header>
+</header>
 
-  <section class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <h1>Building Bridges Between Ideas</h1>
-        <p>Exploring the intersections of physics, philosophy, fitness, and more. Welcome to my personal space where I share my passion for knowledge and continuous growth.</p>
-        <a href="#sections" class="cta-btn">Explore My World</a>
-      </div>
+<main>
+    <div id="home">
+        <section class="tile-section" style="background-image: url('./images/927870d1-859a-46a2-bd17-998068840ebf.png');">
+            <div class="tile-content">
+                <h1>Self Loathing Man Of Inaction</h1>
+                <p>Ever felt like one of these? Check us out ;)</p>
+            </div>
+        </section>
+
+        <section class="tile-section" style="background-image: url('./images/your-image2.jpg');">
+            <div class="tile-content">
+                <h1>Placeholder Title 2</h1>
+                <p>Some random description text for tile 2.</p>
+            </div>
+        </section>
+
+        <section class="tile-section" style="background-image: url('./images/your-image3.jpg');">
+            <div class="tile-content">
+                <h1>Placeholder Title 3</h1>
+                <p>Some random description text for tile 3.</p>
+            </div>
+        </section>
+
+        <section class="tile-section" style="background-image: url('./images/your-image4.jpg');">
+            <div class="tile-content">
+                <h1>Placeholder Title 4</h1>
+                <p>Some random description text for tile 4.</p>
+            </div>
+        </section>
     </div>
-  </section>
 
-  <section id="sections" class="sections">
-    <div class="container">
-      <h2 class="section-title">My Areas of Interest</h2>
-      <div class="cards">
-        <div class="card">
-          <div class="card-img">⚛️</div>
-          <div class="card-content">
-            <h3>Physics</h3>
-            <p>Exploring the fundamental laws that govern our universe, from quantum mechanics to astrophysics.</p>
-            <a href="#physics">Discover More →</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-img">🧠</div>
-          <div class="card-content">
-            <h3>Philosophy</h3>
-            <p>Contemplating the nature of reality, knowledge, and existence through various philosophical traditions.</p>
-            <a href="#philosophy">Discover More →</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-img">💪</div>
-          <div class="card-content">
-            <h3>Fitness</h3>
-            <p>Approaches to physical well-being, training methodologies, and nutritional science.</p>
-            <a href="#fitness">Discover More →</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-img">🎮</div>
-          <div class="card-content">
-            <h3>Fun Stuff</h3>
-            <p>Creative projects, hobbies, and recreational activities that bring joy and balance to life.</p>
-            <a href="#fun">Discover More →</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-img">📚</div>
-          <div class="card-content">
-            <h3>Courses</h3>
-            <p>Educational resources, tutorials, and learning materials I've created or recommend.</p>
-            <a href="#courses">Discover More →</a>
-          </div>
-        </div>
-      </div>
+    <div id="philosophy" class="page-section" style="display:none">
+        <h1>Philosophy</h1>
     </div>
-  </section>
 
-  <!-- Full Page Sections -->
-  <section id="physics-page" class="page hidden">
-    <div class="container">
-      <h2 class="section-title">Physics</h2>
-      <p>Deep dive into my physics projects, research, and more!</p>
-      <a href="#" class="back-btn">← Back Home</a>
+    <div id="physics" class="page-section" style="display:none">
+        <h1>Physics</h1>
     </div>
-  </section>
 
-  <section id="philosophy-page" class="page hidden">
-    <div class="container">
-      <h2 class="section-title">Philosophy</h2>
-      <p>Exploring ideas about reality, existence, and consciousness.</p>
-      <a href="#" class="back-btn">← Back Home</a>
+    <div id="bodybuilding" class="page-section" style="display:none">
+        <h1>Bodybuilding</h1>
     </div>
-  </section>
 
-  <section id="fitness-page" class="page hidden">
-    <div class="container">
-      <h2 class="section-title">Fitness</h2>
-      <p>My journey in building a healthy, strong body — vegetarian style!</p>
-      <a href="#" class="back-btn">← Back Home</a>
+    <div id="projects" class="page-section" style="display:none">
+        <h1>Projects</h1>
     </div>
-  </section>
+</main>
 
-  <section id="fun-page" class="page hidden">
-    <div class="container">
-      <h2 class="section-title">Fun Stuff</h2>
-      <p>Creative side projects, gaming, and hobbies that fuel passion.</p>
-      <a href="#" class="back-btn">← Back Home</a>
-    </div>
-  </section>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+            document.getElementById('loader').style.display = 'none';
 
-  <section id="courses-page" class="page hidden">
-    <div class="container">
-      <h2 class="section-title">Courses</h2>
-      <p>Resources and learning material curated or created by me.</p>
-      <a href="#" class="back-btn">← Back Home</a>
-    </div>
-  </section>
+            const sections = document.querySelectorAll('.tile-section');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.2 });
 
-  <footer id="contact">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>About Me</h3>
-          <p>I'm passionate about connecting diverse fields of knowledge and sharing insights with others.</p>
-        </div>
-        <div class="footer-section">
-          <h3>Contact</h3>
-          <p>Email: your.email@example.com</p>
-          <p>Based in: Your Location</p>
-        </div>
-        <div class="footer-section">
-          <h3>Connect</h3>
-          <div class="social-links">
-            <a href="#">T</a>
-            <a href="#">L</a>
-            <a href="#">G</a>
-            <a href="#">I</a>
-          </div>
-        </div>
-      </div>
-      <div class="copyright">
-        <p>&copy; 2025 Your Name. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        }, 1500);
 
-  <script>
-    const sections = ['physics', 'philosophy', 'fitness', 'fun', 'courses'];
-    const hero = document.querySelector('.hero');
-    const mainSections = document.querySelector('.sections');
-
-    sections.forEach(section => {
-      document.querySelectorAll(`a[href="#${section}"]`).forEach(link => {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-          hero.style.display = 'none';
-          mainSections.style.display = 'none';
-          document.getElementById(`${section}-page`).classList.remove('hidden');
-          document.querySelector('header').scrollIntoView({ behavior: 'smooth' });
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const target = e.target.getAttribute('data-section');
+                if (target) {
+                    document.querySelectorAll('main > div').forEach(div => {
+                        div.style.display = 'none';
+                        div.classList.remove('visible');
+                    });
+                    const section = document.getElementById(target);
+                    if (target === 'home') {
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = 'flex';
+                    }
+                    window.scrollTo(0, 0);
+                    setTimeout(() => {
+                        section.classList.add('visible');
+                    }, 100);
+                }
+            });
         });
-      });
     });
-
-    document.querySelectorAll('.back-btn').forEach(button => {
-      button.addEventListener('click', function(e) {
-        e.preventDefault();
-        hero.style.display = 'flex';
-        mainSections.style.display = 'block';
-        document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
-        document.querySelector('header').scrollIntoView({ behavior: 'smooth' });
-      });
-    });
-
-    document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-      document.querySelector('.nav-links').classList.toggle('active');
-    });
-  </script>
-
+</script>
 </body>
 </html>
